@@ -1,0 +1,172 @@
+{
+	"info": {
+		"_postman_id": "2ba09c30-533d-446b-9603-103a980a000e",
+		"name": "Testing with Postman",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "978772"
+	},
+	"item": [
+		{
+			"name": "CreateLemonade",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"lemonJuice should be 2.5\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.lemonJuice).to.eql(2.5);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"water should be 4.25\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.water).to.eql(4.25);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"sugar should be 2.0\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.sugar).to.eql(2.0);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"iceCubes should be 10\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.iceCubes).to.eql(10);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"response json contains id key\", function () {\r",
+							"    pm.expect(pm.response.json()).to.haveOwnProperty(\"id\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"lemonJuice\": 2.5,\r\n    \"water\": 4.25,\r\n    \"sugar\": 2.0,\r\n    \"iceCubes\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/lemonades",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"lemonades"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetLemonades",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"json returns a list\", function () {\r",
+							"    pm.expect(pm.response.json()).to.be.an(\"array\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/lemonades",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"lemonades"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetLemonadeById",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"response id to be 1\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.eql(1);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"response to have lemonJuice\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.haveOwnProperty(\"lemonJuice\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"response to have water\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.haveOwnProperty(\"water\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"response to have sugar\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.haveOwnProperty(\"sugar\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"response to have iceCubes\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.haveOwnProperty(\"iceCubes\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"response to have price\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.haveOwnProperty(\"price\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/lemonades/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"lemonades",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
